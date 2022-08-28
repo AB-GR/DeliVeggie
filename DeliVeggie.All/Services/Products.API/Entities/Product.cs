@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System;
 
 namespace Products.API.Entities
 {
@@ -11,7 +12,8 @@ namespace Products.API.Entities
 
 		public string Name { get; set; }
 
-		public BsonDateTime EntryDate { get; set; }
+		[BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+		public DateTime EntryDate { get; set; }
 
 		public decimal Price { get; set; }
 	}
