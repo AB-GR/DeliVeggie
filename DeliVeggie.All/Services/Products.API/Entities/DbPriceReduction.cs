@@ -1,6 +1,6 @@
 ﻿namespace Products.API.Entities
 {
-	public class PriceReduction
+	public class DbPriceReduction
 	{
 		public int DayOfWeek { get; set; }
 

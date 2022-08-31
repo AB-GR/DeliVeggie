@@ -11,13 +11,13 @@ namespace Products.API.Data
             var client = new MongoClient(configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
             var database = client.GetDatabase(configuration.GetValue<string>("DatabaseSettings:DatabaseName"));
 
-            Products = database.GetCollection<Product>(configuration.GetValue<string>("DatabaseSettings:ProductsCollectionName"));
-            PriceReductions = database.GetCollection<PriceReduction>(configuration.GetValue<string>("DatabaseSettings:PriceReductionsCollectionName"));
+            Products = database.GetCollection<DbProduct>(configuration.GetValue<string>("DatabaseSettings:ProductsCollectionName"));
+            PriceReductions = database.GetCollection<DbPriceReduction>(configuration.GetValue<string>("DatabaseSettings:PriceReductionsCollectionName"));
             ProductsContextSeed.SeedData(this);
         }
 
-        public IMongoCollection<Product> Products { get; }
+        public IMongoCollection<DbProduct> Products { get; }
 
-        public IMongoCollection<PriceReduction> PriceReductions { get; }
+        public IMongoCollection<DbPriceReduction> PriceReductions { get; }
     }
 }

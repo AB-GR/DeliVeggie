@@ -4,7 +4,7 @@ using System;
 
 namespace Products.API.Entities
 {
-	public class Product
+	public class DbProduct
 	{
 		[BsonId]
 		[BsonRepresentation(BsonType.ObjectId)]
@@ -12,8 +12,8 @@ namespace Products.API.Entities
 
 		public string Name { get; set; }
 
-		[BsonDateTimeOptions(Kind = DateTimeKind.Local)]
-		public DateTime EntryDate { get; set; }
+		//[BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+		//public DateTime EntryDate { get; set; }
 
 		public decimal Price { get; set; }
 	}

@@ -16,7 +16,7 @@ namespace Products.API.Repository
 			_context = context ?? throw new ArgumentNullException(nameof(context));
 		}
 
-		public async Task<Product> GetProductAsync(string id)
+		public async Task<DbProduct> GetProductAsync(string id)
 		{
 			return await _context
 						 .Products
@@ -24,7 +24,7 @@ namespace Products.API.Repository
 						 .FirstOrDefaultAsync();
 		}
 
-		public async Task<IEnumerable<Product>> GetProductsAsync()
+		public async Task<IEnumerable<DbProduct>> GetProductsAsync()
 		{
 			return await _context
 							.Products

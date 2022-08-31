@@ -1,16 +1,12 @@
+using DeliVeggie.Gateway.MessageConsumers;
 using EasyNetQ;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Products.API.Business;
-using Products.API.Data;
-using Products.API.MessageConsumers;
-using Products.API.Repository;
-using System;
 
-namespace Products.API
+namespace DeliVeggie.Gateway
 {
 	public class Startup
 	{
@@ -26,11 +22,7 @@ namespace Products.API
 		{
 			services.AddSingleton<IBus>(RabbitHutch.CreateBus(Configuration["MessageBroker:ConnectionString"]));
 			services.AddSingleton(RabbitHutch.CreateBus(Configuration["MessageBroker:ConnectionString"]));
-			services.AddScoped<IProductsContext, ProductsContext>();
-			services.AddScoped<IProductRepository, ProductRepository>();
-			services.AddScoped<IProductManager, ProductManager>();
-			services.AddTransient<IProductRequestConsumer, ProductRequestConsumer>();
-			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+			services.AddTransient<IProductResponseConsumer, ProductResponseConsumer>();
 			services.AddControllers();
 		}
 

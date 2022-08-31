@@ -4,11 +4,20 @@ services:
   productsdb:
     image: mongo:4.2
 
+  rabbitmq:
+    image: rabbitmq:3-management-alpine 
+
   products.api:
     image: ${DOCKER_REGISTRY-}productsapi
     build:
       context: .
       dockerfile: Services/Products.API/Dockerfile
+
+  deliveggie.gateway:
+    image: ${DOCKER_REGISTRY-}deliveggiegateway
+    build:
+      context: .
+      dockerfile: ApiGateways/DeliVeggie.Gateway/Dockerfile
 
 volumes:
   mongo_data:  

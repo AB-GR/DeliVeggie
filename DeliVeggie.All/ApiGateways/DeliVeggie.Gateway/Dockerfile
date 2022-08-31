@@ -6,17 +6,17 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
-COPY ["Services/Products.API/Products.API.csproj", "Services/Products.API/"]
+COPY ["ApiGateways/DeliVeggie.Gateway/DeliVeggie.Gateway.csproj", "ApiGateways/DeliVeggie.Gateway/"]
 COPY ["MessageBroker/Messages/Messages.csproj", "MessageBroker/Messages/"]
-RUN dotnet restore "Services/Products.API/Products.API.csproj"
+RUN dotnet restore "ApiGateways/DeliVeggie.Gateway/DeliVeggie.Gateway.csproj"
 COPY . .
-WORKDIR "/src/Services/Products.API"
-RUN dotnet build "Products.API.csproj" -c Release -o /app/build
+WORKDIR "/src/ApiGateways/DeliVeggie.Gateway"
+RUN dotnet build "DeliVeggie.Gateway.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Products.API.csproj" -c Release -o /app/publish
+RUN dotnet publish "DeliVeggie.Gateway.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Products.API.dll"]
+ENTRYPOINT ["dotnet", "DeliVeggie.Gateway.dll"]
