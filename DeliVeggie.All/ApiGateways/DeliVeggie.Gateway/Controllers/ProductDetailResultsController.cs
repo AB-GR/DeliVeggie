@@ -18,7 +18,7 @@ namespace DeliVeggie.Gateway.Controllers
 		}
 
 		[HttpGet("{transactionId}", Name = "GetProductDetailResults")]
-		public ActionResult<GetProductDetailsResponse> GetProducts(string transactionId)
+		public ActionResult<GetProductDetailsResponse> GetProductDetailResults(string transactionId)
 		{
 			var response = new GetProductDetailsResponse();
 			if (_memoryCache.TryGetValue<Product>(transactionId, out var record))
