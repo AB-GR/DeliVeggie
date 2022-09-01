@@ -1,16 +1,3 @@
-<h1 id="tableLabel">Deli Veggie Products</h1>
-
-<p *ngIf="!products"><em>Loading....</em></p>
-
-<table *ngIf="products">
-    <thead>
-      <tr>
-        <th>Product Name</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let product of products">
-        <td>{{ product.name }}</td>
-      </tr>
-    </tbody>
-</table>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

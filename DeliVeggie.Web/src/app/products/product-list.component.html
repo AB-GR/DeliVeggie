@@ -1,0 +1,21 @@
+<h1 id="tableLabel">Deli Veggie Products</h1>
+
+<p *ngIf="!products"><em>Loading....</em></p>
+
+<table *ngIf="products">
+  <thead>
+    <tr>
+      <th>Product Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>
+        <a [title]="product.name + ' details'"
+           [routerLink]="['/products', product.id]">
+          {{ product.name }}
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
