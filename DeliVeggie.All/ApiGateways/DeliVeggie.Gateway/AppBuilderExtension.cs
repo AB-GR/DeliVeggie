@@ -19,8 +19,8 @@ namespace DeliVeggie.Gateway
 
             lifeTime.ApplicationStarted.Register(async () =>
             {
-                await bus.PubSub.SubscribeAsync<ProductsResponse>(subscriptionIdPrefix, productResponseConsumer.ConsumeProductsResponseAsync);
-                await bus.PubSub.SubscribeAsync<ProductDetailsResponse>(subscriptionIdPrefix, productResponseConsumer.ConsumeProductDetailsResponseAsync);
+                await bus.PubSub.SubscribeAsync<ProductsResponse>(subscriptionIdPrefix, productResponseConsumer.ConsumeProductsResponse);
+                await bus.PubSub.SubscribeAsync<ProductDetailsResponse>(subscriptionIdPrefix, productResponseConsumer.ConsumeProductDetailsResponse);
             });
 
             lifeTime.ApplicationStopped.Register(() => bus.Dispose());

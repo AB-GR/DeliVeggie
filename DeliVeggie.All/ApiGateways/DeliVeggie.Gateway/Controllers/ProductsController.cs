@@ -1,7 +1,9 @@
-﻿using EasyNetQ;
+﻿using DeliVeggie.Gateway.Dto;
+using EasyNetQ;
 using Messages;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Caching.Memory;
+using System;
 using System.Threading.Tasks;
 
 namespace DeliVeggie.Gateway.Controllers
@@ -10,27 +12,30 @@ namespace DeliVeggie.Gateway.Controllers
 	[Route("gateway/[controller]")]
 	public class ProductsController : ControllerBase
 	{
-		private readonly ILogger<ProductsController> _logger;
 		private readonly IBus _bus;
+		IMemoryCache _memoryCache;
 
-		public ProductsController(ILogger<ProductsController> logger, IBus bus)
+		public ProductsController(IBus bus, IMemoryCache memoryCache)
 		{
-			_logger = logger;
 			_bus = bus;
+			_memoryCache = memoryCache;
 		}
 
 		[HttpGet]
-		public async Task<ActionResult> GetProducts()
+		public async Task<ActionResult<GetProductsQueueResponse>> GetProducts()
 		{
-			await _bus.PubSub.PublishAsync(new ProductsRequest());
-			return Ok();
+			var productsRequest = new ProductsRequest { TransactionId = Guid.NewGuid().ToString() };
+			await _bus.PubSub.PublishAsync(productsRequest);
+			return Ok(new GetProductsQueueResponse { IsQueued = true, TransactionId = productsRequest.TransactionId });
 		}
 
+
 		[HttpGet("{id:length(24)}", Name = "GetProduct")]
-		public async Task<ActionResult<Product>> GetProductById(string id)
+		public async Task<ActionResult<GetProductDetailsQueueResponse>> GetProductById(string id)
 		{
-			await _bus.PubSub.PublishAsync(new ProductDetailsRequest { ProductId = id });
-			return Ok();
+			var productDetailsRequest = new ProductDetailsRequest { TransactionId = Guid.NewGuid().ToString(), ProductId = id };
+			await _bus.PubSub.PublishAsync(productDetailsRequest);
+			return Ok(new GetProductDetailsQueueResponse { IsQueued = true, TransactionId = productDetailsRequest.TransactionId });
 		}
 	}
 }

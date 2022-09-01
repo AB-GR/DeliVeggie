@@ -30,13 +30,13 @@ namespace Products.API.MessageConsumers
 		public async Task ConsumeProductsRequestAsync(ProductsRequest message)
 		{
 			var products = await _productManager.GetProductsAsync();
-			await _bus.PubSub.PublishAsync(new ProductsResponse { ProductList = _mapper.Map<List<Product>>(products) });
+			await _bus.PubSub.PublishAsync(new ProductsResponse { TransactionId = message.TransactionId, ProductList = _mapper.Map<List<Product>>(products) });
 		}
 
 		public async Task ConsumeProductDetailsRequestAsync(ProductDetailsRequest message)
 		{
 			var product = await _productManager.GetProductByIdAsync(message.ProductId);
-			await _bus.PubSub.PublishAsync(new ProductDetailsResponse { Product = _mapper.Map<Product>(product) });
+			await _bus.PubSub.PublishAsync(new ProductDetailsResponse { TransactionId = message.TransactionId, Product = _mapper.Map<Product>(product) });
 		}
 	}
 }

@@ -20,6 +20,15 @@ namespace DeliVeggie.Gateway
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddMemoryCache();
+			services.AddCors(options =>
+			{
+				options.AddDefaultPolicy(
+								  builder =>
+								  {
+									  builder.WithOrigins("https://localhost:4200");
+								  });
+			});
 			services.AddSingleton<IBus>(RabbitHutch.CreateBus(Configuration["MessageBroker:ConnectionString"]));
 			services.AddSingleton(RabbitHutch.CreateBus(Configuration["MessageBroker:ConnectionString"]));
 			services.AddTransient<IProductResponseConsumer, ProductResponseConsumer>();
@@ -37,6 +46,8 @@ namespace DeliVeggie.Gateway
 			app.UseEasyNetQSubscribe("ProductMessageService");
 
 			app.UseRouting();
+
+			app.UseCors();
 
 			app.UseAuthorization();
 

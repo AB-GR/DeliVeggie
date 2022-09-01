@@ -1,27 +1,34 @@
 ﻿using Messages;
+using Microsoft.Extensions.Caching.Memory;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DeliVeggie.Gateway.MessageConsumers
 {
 	public interface IProductResponseConsumer
 	{
-		Task ConsumeProductsResponseAsync(ProductsResponse message);
+		void ConsumeProductsResponse(ProductsResponse message);
 
-		Task ConsumeProductDetailsResponseAsync(ProductDetailsResponse message);
+		void ConsumeProductDetailsResponse(ProductDetailsResponse message);
 	}
 
 	public class ProductResponseConsumer : IProductResponseConsumer
 	{
-		public Task ConsumeProductsResponseAsync(ProductsResponse message)
+		private readonly IMemoryCache _memoryCache;
+
+		public ProductResponseConsumer(IMemoryCache memoryCache)
 		{
-			//throw new NotImplementedException();
-			return Task.CompletedTask;
+			_memoryCache = memoryCache;
 		}
 
-		public Task ConsumeProductDetailsResponseAsync(ProductDetailsResponse message)
+		public void ConsumeProductsResponse(ProductsResponse message)
 		{
-			//throw new NotImplementedException();
-			return Task.CompletedTask;
+			_memoryCache.Set<List<Product>>(message.TransactionId, message.ProductList);
+		}
+
+		public void ConsumeProductDetailsResponse(ProductDetailsResponse message)
+		{
+			_memoryCache.Set<Product>(message.TransactionId, message.Product);
 		}
 	}
 }
