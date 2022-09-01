@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliVeggie.Gateway", "ApiGa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{02756B34-F198-4625-851A-A46648F0414C}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "DeliVeggie.Web", "..\DeliVeggie.Web\DeliVeggie.Web.esproj", "{2A017462-D50B-4B01-A3A3-1B8C2A282D58}"
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "DeliVeggie.Web", "FrontEnd\DeliVeggie.Web\DeliVeggie.Web.esproj", "{2A017462-D50B-4B01-A3A3-1B8C2A282D58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
