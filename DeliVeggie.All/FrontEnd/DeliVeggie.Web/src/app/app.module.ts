@@ -25,3 +25,33 @@ import { ProductListComponent } from './products/product-list.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+declare global {
+
+  export interface GetProductsQueueResponse {
+    isQueued: boolean;
+    transactionId: string;
+  }
+
+  export interface GetProductsResponse {
+    isDone: boolean;
+    records: Product[];
+  }
+
+  export interface GetProductDetailsQueueResponse {
+    isQueued: boolean;
+    transactionId: string;
+  }
+
+  export interface GetProductDetailsResponse {
+    isDone: boolean;
+    record: Product;
+  }
+
+  export interface Product {
+    id: string;
+    name: string;
+    price: number;
+    entryDate: string;
+  }
+}

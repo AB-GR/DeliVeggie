@@ -8,7 +8,7 @@ namespace Messages
 
 		public string Name { get; set; }
 
-		public DateTime EntryDate { get; set; }
+		public string EntryDate { get; set; }
 
 		public decimal Price { get; set; }
 	}

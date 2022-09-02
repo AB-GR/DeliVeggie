@@ -56,19 +56,3 @@ export class ProductDetailsComponent implements OnInit {
     });
   }
 }
-
-interface GetProductDetailsQueueResponse {
-  isQueued: boolean;
-  transactionId: string;
-}
-
-interface GetProductDetailsResponse {
-  isDone: boolean;
-  record: Product;
-}
-
-interface Product {
-  id: string;
-  name: string;
-  price: number;
-}

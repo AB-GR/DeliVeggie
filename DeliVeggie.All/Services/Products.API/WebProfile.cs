@@ -8,7 +8,7 @@ namespace Products.API
 	{
 		public WebProfile()
 		{
-			CreateMap<DbProduct, Product>();
+			CreateMap<DbProduct, Product>().ForMember(x => x.EntryDate, opt => opt.MapFrom(o => o.EntryDate.ToString("dd MMMM, yyyy")));
 		}
 	}
 }

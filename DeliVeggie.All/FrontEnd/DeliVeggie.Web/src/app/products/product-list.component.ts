@@ -53,19 +53,3 @@ export class ProductListComponent implements OnInit {
   }
 
 }
-
-interface GetProductsQueueResponse {
-  isQueued: boolean;
-  transactionId: string;
-}
-
-interface GetProductsResponse {
-  isDone: boolean;
-  records: Product[];
-}
-
-interface Product {
-  id: string;
-  name: string;
-  price: number;
-}
