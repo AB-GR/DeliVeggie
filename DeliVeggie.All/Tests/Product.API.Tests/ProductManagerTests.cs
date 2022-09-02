@@ -1,5 +1,7 @@
+using AutoMapper;
 using Moq;
 using NUnit.Framework;
+using Products.API;
 using Products.API.Business;
 using Products.API.Entities;
 using Products.API.Repository;
@@ -18,8 +20,14 @@ namespace Product.API.Tests
 
 		public ProductManagerTests()
 		{
-			mockRepository = new Mock<IProductRepository>();
-            productManager = new ProductManager(mockRepository.Object);
+            var mapperConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new WebProfile());
+            });
+            var mapper = mapperConfig.CreateMapper();
+
+            mockRepository = new Mock<IProductRepository>();
+            productManager = new ProductManager(mockRepository.Object, mapper);
 
         }
 

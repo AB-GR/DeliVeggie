@@ -1,4 +1,5 @@
-﻿using Products.API.Entities;
+﻿using AutoMapper;
+using Messages;
 using Products.API.Repository;
 using System;
 using System.Collections.Generic;
@@ -8,34 +9,37 @@ namespace Products.API.Business
 {
 	public interface IProductManager
 	{
-		Task<List<DbProduct>> GetProductsAsync();
+		Task<List<Product>> GetProductsAsync();
 
-		Task<DbProduct> GetProductByIdAsync(string id);
+		Task<Product> GetProductByIdAsync(string id);
 	}
 
 	public class ProductManager : IProductManager
 	{
 		private readonly IProductRepository _repository;
+		private readonly IMapper _mapper;
 
-		public ProductManager(IProductRepository repository)
+		public ProductManager(IProductRepository repository, IMapper mapper)
 		{
 			_repository = repository ?? throw new ArgumentNullException(nameof(repository));
+			_mapper = mapper;
 		}
 
-		public async Task<List<DbProduct>> GetProductsAsync()
+		public async Task<List<Product>> GetProductsAsync()
 		{
-			return await _repository.GetProductsAsync();
+			var dbProducts = await _repository.GetProductsAsync();
+			return _mapper.Map<List<Product>>(dbProducts);
 		}
 
-		public async Task<DbProduct> GetProductByIdAsync(string id)
+		public async Task<Product> GetProductByIdAsync(string id)
 		{
-			var product = await _repository.GetProductByIdAsync(id);
-			if (product == null)
+			var dbProduct = await _repository.GetProductByIdAsync(id);
+			if (dbProduct == null)
 			{
 				throw new Exception($"Product with id: {id}, not found.");
 			}
 
-			return product;
+			return _mapper.Map<Product>(dbProduct);
 		}
 	}
 }

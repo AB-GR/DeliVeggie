@@ -18,25 +18,23 @@ namespace Products.API.MessageConsumers
 	{
 		private readonly IProductManager _productManager;
 		private readonly IBus _bus;
-		private readonly IMapper _mapper;
 
-		public ProductRequestConsumer(IProductManager productManager, IBus bus, IMapper mapper)
+		public ProductRequestConsumer(IProductManager productManager, IBus bus)
 		{
 			_productManager = productManager;
 			_bus = bus;
-			_mapper = mapper;
 		}
 
 		public async Task ConsumeProductsRequestAsync(ProductsRequest message)
 		{
 			var products = await _productManager.GetProductsAsync();
-			await _bus.PubSub.PublishAsync(new ProductsResponse { TransactionId = message.TransactionId, ProductList = _mapper.Map<List<Product>>(products) });
+			await _bus.PubSub.PublishAsync(new ProductsResponse { TransactionId = message.TransactionId, ProductList = products });
 		}
 
 		public async Task ConsumeProductDetailsRequestAsync(ProductDetailsRequest message)
 		{
 			var product = await _productManager.GetProductByIdAsync(message.ProductId);
-			await _bus.PubSub.PublishAsync(new ProductDetailsResponse { TransactionId = message.TransactionId, Product = _mapper.Map<Product>(product) });
+			await _bus.PubSub.PublishAsync(new ProductDetailsResponse { TransactionId = message.TransactionId, Product = product });
 		}
 	}
 }
