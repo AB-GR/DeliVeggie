@@ -8,7 +8,7 @@ namespace Products.API.Business
 {
 	public interface IProductManager
 	{
-		Task<IEnumerable<DbProduct>> GetProductsAsync();
+		Task<List<DbProduct>> GetProductsAsync();
 
 		Task<DbProduct> GetProductByIdAsync(string id);
 	}
@@ -22,14 +22,14 @@ namespace Products.API.Business
 			_repository = repository ?? throw new ArgumentNullException(nameof(repository));
 		}
 
-		public async Task<IEnumerable<DbProduct>> GetProductsAsync()
+		public async Task<List<DbProduct>> GetProductsAsync()
 		{
 			return await _repository.GetProductsAsync();
 		}
 
 		public async Task<DbProduct> GetProductByIdAsync(string id)
 		{
-			var product = await _repository.GetProductAsync(id);
+			var product = await _repository.GetProductByIdAsync(id);
 			if (product == null)
 			{
 				throw new Exception($"Product with id: {id}, not found.");

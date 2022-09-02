@@ -6,8 +6,8 @@ namespace Products.API.Repository
 {
 	public interface IProductRepository
 	{
-		Task<IEnumerable<DbProduct>> GetProductsAsync();
+		Task<List<DbProduct>> GetProductsAsync();
 
-		Task<DbProduct> GetProductAsync(string id);
+		Task<DbProduct> GetProductByIdAsync(string id);
 	}
 }

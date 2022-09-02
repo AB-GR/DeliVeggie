@@ -21,6 +21,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{02
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "DeliVeggie.Web", "FrontEnd\DeliVeggie.Web\DeliVeggie.Web.esproj", "{2A017462-D50B-4B01-A3A3-1B8C2A282D58}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F104D83C-1A16-4AA8-9C9E-7DAEEA570FC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Product.API.Tests", "Tests\Product.API.Tests\Product.API.Tests.csproj", "{A8817D43-58AC-464B-90B2-B2188EC8A340}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +53,10 @@ Global
 		{2A017462-D50B-4B01-A3A3-1B8C2A282D58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A017462-D50B-4B01-A3A3-1B8C2A282D58}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2A017462-D50B-4B01-A3A3-1B8C2A282D58}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A8817D43-58AC-464B-90B2-B2188EC8A340}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8817D43-58AC-464B-90B2-B2188EC8A340}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8817D43-58AC-464B-90B2-B2188EC8A340}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8817D43-58AC-464B-90B2-B2188EC8A340}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +66,7 @@ Global
 		{4E4C4124-B211-419D-BA6C-C888E91647EB} = {7B1559DB-D910-4A56-B2A4-140ED2DD7691}
 		{5F4343B5-C9EE-4FD7-BABC-7AA6357B1520} = {82474A15-E464-46A4-ADE7-4FC1780B9CF3}
 		{2A017462-D50B-4B01-A3A3-1B8C2A282D58} = {02756B34-F198-4625-851A-A46648F0414C}
+		{A8817D43-58AC-464B-90B2-B2188EC8A340} = {F104D83C-1A16-4AA8-9C9E-7DAEEA570FC9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {392F6636-11E9-41F8-905F-0E75CC0883F7}
