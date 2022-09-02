@@ -31,7 +31,7 @@ namespace Products.API.Business
 		{
 			var dbProducts = await _repository.GetProductsAsync();
 			var products = _mapper.Map<List<Product>>(dbProducts);
-			products = await _discountManager.ApplyDiscounts(products);
+			products = await _discountManager.ApplyDiscountsAsync(products);
 
 			return products;
 		}
@@ -45,7 +45,7 @@ namespace Products.API.Business
 			}
 
 			var product = _mapper.Map<Product>(dbProduct);
-			product = await _discountManager.ApplyDiscount(product);
+			product = await _discountManager.ApplyDiscountAsync(product);
 
 			return product;
 		}

@@ -9,9 +9,9 @@ namespace Products.API.Business
 {
 	public interface IDiscountManager
 	{
-		Task<List<Product>> ApplyDiscounts(List<Product> products);
+		Task<List<Product>> ApplyDiscountsAsync(List<Product> products);
 
-		Task<Product> ApplyDiscount(Product product);
+		Task<Product> ApplyDiscountAsync(Product product);
 	}
 
 	public class DiscountManager : IDiscountManager
@@ -23,7 +23,7 @@ namespace Products.API.Business
 			_discountRepository = discountRepository;
 		}
 
-		public async Task<Product> ApplyDiscount(Product product)
+		public async Task<Product> ApplyDiscountAsync(Product product)
 		{
 			var priceReductions = await _discountRepository.GetPriceReductionsAsync();
 			var priceReduction = priceReductions.FirstOrDefault(x => x.DayOfWeek == (int)DateTime.UtcNow.DayOfWeek);
@@ -36,7 +36,7 @@ namespace Products.API.Business
 			return product;
 		}
 
-		public async Task<List<Product>> ApplyDiscounts(List<Product> products)
+		public async Task<List<Product>> ApplyDiscountsAsync(List<Product> products)
 		{
 			var priceReductions = await _discountRepository.GetPriceReductionsAsync();
 			var priceReduction = priceReductions.FirstOrDefault(x => x.DayOfWeek == (int)DateTime.UtcNow.DayOfWeek);
