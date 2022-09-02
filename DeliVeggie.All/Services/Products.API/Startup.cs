@@ -28,7 +28,9 @@ namespace Products.API
 			services.AddSingleton(RabbitHutch.CreateBus(Configuration["MessageBroker:ConnectionString"]));
 			services.AddScoped<IProductsContext, ProductsContext>();
 			services.AddScoped<IProductRepository, ProductRepository>();
+			services.AddScoped<IDiscountRepository, DiscountRepository>();
 			services.AddScoped<IProductManager, ProductManager>();
+			services.AddScoped<IDiscountManager, DiscountManager>();
 			services.AddTransient<IProductRequestConsumer, ProductRequestConsumer>();
 			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 			services.AddControllers();

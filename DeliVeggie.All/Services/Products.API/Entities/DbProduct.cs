@@ -10,11 +10,13 @@ namespace Products.API.Entities
 		[BsonRepresentation(BsonType.ObjectId)]
 		public string Id { get; set; }
 
+		[BsonElement]
 		public string Name { get; set; }
 
-		//[BsonDateTimeOptions(Kind = DateTimeKind.Local)]
-		//public DateTime EntryDate { get; set; }
+		[BsonElement]
+		public DateTime EntryDate { get; set; }
 
+		[BsonElement]
 		public decimal Price { get; set; }
 	}
 }

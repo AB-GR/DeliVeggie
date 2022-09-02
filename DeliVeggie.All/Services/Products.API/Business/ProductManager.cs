@@ -16,11 +16,13 @@ namespace Products.API.Business
 
 	public class ProductManager : IProductManager
 	{
+		private readonly IDiscountManager _discountManager;
 		private readonly IProductRepository _repository;
 		private readonly IMapper _mapper;
 
-		public ProductManager(IProductRepository repository, IMapper mapper)
+		public ProductManager(IDiscountManager discountManager, IProductRepository repository, IMapper mapper)
 		{
+			_discountManager = discountManager;
 			_repository = repository ?? throw new ArgumentNullException(nameof(repository));
 			_mapper = mapper;
 		}
@@ -28,7 +30,10 @@ namespace Products.API.Business
 		public async Task<List<Product>> GetProductsAsync()
 		{
 			var dbProducts = await _repository.GetProductsAsync();
-			return _mapper.Map<List<Product>>(dbProducts);
+			var products = _mapper.Map<List<Product>>(dbProducts);
+			products = await _discountManager.ApplyDiscounts(products);
+
+			return products;
 		}
 
 		public async Task<Product> GetProductByIdAsync(string id)
@@ -39,7 +44,10 @@ namespace Products.API.Business
 				throw new Exception($"Product with id: {id}, not found.");
 			}
 
-			return _mapper.Map<Product>(dbProduct);
+			var product = _mapper.Map<Product>(dbProduct);
+			product = await _discountManager.ApplyDiscount(product);
+
+			return product;
 		}
 	}
 }

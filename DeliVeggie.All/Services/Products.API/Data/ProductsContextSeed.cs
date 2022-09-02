@@ -1,5 +1,6 @@
 ﻿using MongoDB.Driver;
 using Products.API.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace Products.API.Data
@@ -29,42 +30,42 @@ namespace Products.API.Data
                 {
                     Id = "602d2149e773f2a3990b47f5",
                     Name = "IPhone X",
-                    //EntryDate = DateTime.UtcNow,
+                    EntryDate = DateTime.UtcNow,
                     Price = 1000
                 },
                 new DbProduct()
                 {
                     Id = "602d2149e773f2a3990b47f6",
                     Name = "Samsung 10",
-                    //EntryDate = DateTime.UtcNow,
+                    EntryDate = DateTime.UtcNow,
                     Price = 500
                 },
                 new DbProduct()
                 {
                     Id = "602d2149e773f2a3990b47f7",
                     Name = "Huawei Plus",
-                    //EntryDate = DateTime.UtcNow,
+                    EntryDate = DateTime.UtcNow,
                     Price = 400
                 },
                 new DbProduct()
                 {
                     Id = "602d2149e773f2a3990b47f8",
                     Name = "Xiaomi Mi 9",
-                    //EntryDate = DateTime.UtcNow,
+                    EntryDate = DateTime.UtcNow,
                     Price = 300
                 },
                 new DbProduct()
                 {
                     Id = "602d2149e773f2a3990b47f9",
                     Name = "HTC U11+ Plus",
-                    //EntryDate = DateTime.UtcNow,
+                    EntryDate = DateTime.UtcNow,
                     Price = 450
                 },
                 new DbProduct()
                 {
                     Id = "602d2149e773f2a3990b47fa",
                     Name = "LG G7 ThinQ",
-                    //EntryDate = DateTime.UtcNow,
+                    EntryDate = DateTime.UtcNow,
                     Price = 339
                 }
             };
